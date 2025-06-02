@@ -1,20 +1,14 @@
 import "@/ui/theme/unistyle";
+import "react-native-reanimated";
 
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { UnistylesProvider } from "react-native-unistyles";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -25,14 +19,17 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <UnistylesProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+    <UnistylesProvider>
+      <AuthProvider>
         <StatusBar style="auto" />
-      </UnistylesProvider>
-    </ThemeProvider>
+        <Stack>
+          <Stack.Screen
+            name="(protected)"
+            options={{ headerShown: false, animation: "none" }}
+          />
+          <Stack.Screen name="login" options={{ animation: "none" }} />
+        </Stack>
+      </AuthProvider>
+    </UnistylesProvider>
   );
 }
