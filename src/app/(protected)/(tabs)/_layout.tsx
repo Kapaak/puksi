@@ -2,8 +2,8 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
 
-import { HapticTab } from "@/components/HapticTab";
-import TabBarBackground from "@/components/ui/TabBarBackground";
+import { HapticTab } from "@/ui/components/HapticTab";
+import BlurTabBarBackground from "@/ui/components/TabBarBackground.ios";
 import { CircleUserRound, HouseIcon, Paperclip } from "lucide-react-native";
 import { useStyles } from "react-native-unistyles";
 
@@ -16,7 +16,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: theme.colors.primary.main,
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
+        tabBarBackground: BlurTabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
             position: "absolute",
