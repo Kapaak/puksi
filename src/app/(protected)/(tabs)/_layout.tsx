@@ -58,6 +58,11 @@ export default function TabLayout() {
         name="my-profile"
         options={{
           title: "Můj profil",
+          tabBarBadge: 2,
+          tabBarBadgeStyle: {
+            backgroundColor: theme.colors.error.main,
+            color: theme.colors.grey["100"],
+          },
           tabBarIcon: ({ color }) => (
             <CircleUserRound size={24} color={color} strokeWidth={2} />
           ),

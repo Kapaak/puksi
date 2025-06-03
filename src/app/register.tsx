@@ -5,13 +5,14 @@ import { Link, Redirect } from "expo-router";
 import { Text, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
-export default function LoginScreen() {
+interface RegisterScreenProps {}
+
+export default function RegisterScreen({}: RegisterScreenProps) {
   const { styles } = useStyles(stylesheet);
 
-  const { isLoggedIn, isReady, logIn } = useAuthContext();
+  const { isLoggedIn, isReady } = useAuthContext();
 
   if (!isReady) {
-    // Optionally, you can return a loading indicator here
     return null;
   }
 
@@ -21,26 +22,23 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Vítej zpátky!</Text>
+      <Text style={styles.title}>Zaregistrujte se</Text>
 
       <View style={styles.buttonContainer}>
-        <Button onPress={logIn} variant="outlined">
-          Přihlásit se pomocí Google
-        </Button>
-        <Button onPress={logIn} variant="outlined">
-          Přihlásit se pomocí Facebooku
-        </Button>
-        <Text style={styles.dividerText}>---- Nebo pomocí emailu ----</Text>
+        <Input placeholder="Jméno" />
+        <Input placeholder="Příjmení" />
+        <Input placeholder="Přezdívka" />
         <Input placeholder="Zadejte email" />
-        <Input placeholder="Zadejte heslo" />
-        <Button onPress={logIn}>Přihlásit se</Button>
+        <Input placeholder="Zadejte heslo" secureTextEntry />
+        <Input placeholder="Potvrdit heslo" secureTextEntry />
+        <Button onPress={() => {}}>Vytvořit účet</Button>
       </View>
 
-      <View style={styles.signUpContainer}>
-        <Text>Ještě nemáte účet? </Text>
+      <View style={styles.signInContainer}>
+        <Text>Už máte účet? </Text>
 
-        <Link href="/register">
-          <Button variant="plain">Zaregistrujte se</Button>
+        <Link href="/login">
+          <Button variant="plain">Přihlašte se</Button>
         </Link>
       </View>
     </View>
@@ -67,12 +65,7 @@ const stylesheet = createStyleSheet((theme) => ({
     width: "100%",
     maxWidth: 400,
   },
-  dividerText: {
-    textAlign: "center",
-    color: theme.colors.grey["700"],
-    marginVertical: 5,
-  },
-  signUpContainer: {
+  signInContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

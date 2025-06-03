@@ -27,7 +27,14 @@ export default function RootLayout() {
             name="(protected)"
             options={{ headerShown: false, animation: "none" }}
           />
-          <Stack.Screen name="login" options={{ animation: "none" }} />
+          <Stack.Screen
+            name="login"
+            options={{ animation: "none", headerShown: false }}
+          />
+          <Stack.Screen
+            name="register"
+            options={{ animation: "none", headerShown: false }}
+          />
         </Stack>
       </AuthProvider>
     </UnistylesProvider>
